@@ -14,6 +14,12 @@ void glfwWindowSizeCallback(GLFWwindow* window, int sizeX, int sizeY) {
     glViewport(0, 0, windowSizeX, windowSizeY);
 }
 
+void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode) {
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, GL_TRUE);
+    }
+}
+
 int main(int argc, char** argv) {
     if (!glfwInit()) {
         cout << "glfwInit() - failed" << endl;
@@ -33,6 +39,8 @@ int main(int argc, char** argv) {
     }
 
     glfwSetWindowSizeCallback(window, glfwWindowSizeCallback);
+    glfwSetKeyCallback(window, glfwKeyCallback);
+
     glfwMakeContextCurrent(window);
     
     if (!gladLoadGL()) {
@@ -56,4 +64,3 @@ int main(int argc, char** argv) {
     glfwTerminate();
     return 0;
 }
-
