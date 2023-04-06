@@ -11,7 +11,11 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    GLFWwindow* window = glfwCreateWindow(640, 480, "OpenGL-game", NULL, NULL);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    GLFWwindow* window = glfwCreateWindow(640, 480, "OpenGL-game", nullptr, nullptr);
 
     if (!window) {
         glfwTerminate();
@@ -25,6 +29,9 @@ int main(int argc, char** argv) {
         cout << "gladLoadGL() - failed" << endl;
         return -1;
     }
+
+    cout << "Renderer: " << glGetString(GL_RENDERER) << endl;
+    cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
     
     glClearColor(0, 1, 0, 1);
 
