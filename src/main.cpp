@@ -5,6 +5,15 @@
 using std::cout;
 using std::endl;
 
+int windowSizeX = 1080;
+int windowSizeY = 720;
+
+void glfwWindowSizeCallback(GLFWwindow* window, int sizeX, int sizeY) {
+    windowSizeX = sizeX;
+    windowSizeY = sizeY;
+    glViewport(0, 0, windowSizeX, windowSizeY);
+}
+
 int main(int argc, char** argv) {
     if (!glfwInit()) {
         cout << "glfwInit() - failed" << endl;
@@ -15,7 +24,7 @@ int main(int argc, char** argv) {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(640, 480, "OpenGL-game", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(windowSizeX, windowSizeY, "OpenGL-game", nullptr, nullptr);
 
     if (!window) {
         glfwTerminate();
@@ -23,6 +32,7 @@ int main(int argc, char** argv) {
         return -1;
     }
 
+    glfwSetWindowSizeCallback(window, glfwWindowSizeCallback);
     glfwMakeContextCurrent(window);
     
     if (!gladLoadGL()) {
