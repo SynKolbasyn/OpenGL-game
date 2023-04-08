@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.26.3 FATAL_ERROR)
 
 set(PROJECT_NAME OpenGL-game)
+SET(CMAKE_C_COMPILER clang)
+SET(CMAKE_CXX_COMPILER clang++)
 
 project(${PROJECT_NAME})
 
